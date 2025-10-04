@@ -1,0 +1,54 @@
+@model IEnumerable<PortalAcademico.Models.Curso>
+
+<h2>Catálogo de Cursos</h2>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <input type="text" name="nombre" placeholder="Buscar por nombre" class="form-control mb-2" />
+
+    <div class="row">
+        <div class="col">
+            <input type="number" name="creditosMin" placeholder="Créditos mín" class="form-control" />
+        </div>
+        <div class="col">
+            <input type="number" name="creditosMax" placeholder="Créditos máx" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col">
+            <input type="time" name="horaInicio" class="form-control" />
+        </div>
+        <div class="col">
+            <input type="time" name="horaFin" class="form-control" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+</form>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Créditos</th>
+            <th>Horario</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var curso in Model)
+    {
+        <tr>
+            <td>@curso.Codigo</td>
+            <td>@curso.Nombre</td>
+            <td>@curso.Creditos</td>
+            <td>@curso.HorarioInicio - @curso.HorarioFin</td>
+            <td>
+                <a asp-action="Detalle" asp-route-id="@curso.Id" class="btn btn-info">Ver Detalle</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
