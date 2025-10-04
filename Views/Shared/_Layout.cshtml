@@ -25,6 +25,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+                        @* Mostrar enlace al último curso visitado si existe *@
+                        @{
+                            var ultimoCursoId = Context.Session.GetInt32("UltimoCursoId");
+                            var ultimoCursoNombre = Context.Session.GetString("UltimoCursoNombre");
+                        }
+                        @if (ultimoCursoId.HasValue && !string.IsNullOrEmpty(ultimoCursoNombre))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-success" asp-controller="Catalogo" asp-action="Detalle" asp-route-id="@ultimoCursoId">
+                                    Volver al curso @ultimoCursoNombre
+                                </a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

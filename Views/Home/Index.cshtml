@@ -1,8 +1,59 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Portal Académico";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Bienvenido al Portal Académico</h1>
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-3 mb-3">
+            <a asp-controller="Catalogo" asp-action="Index" class="btn btn-primary btn-lg btn-block">
+                Catálogo de Cursos
+            </a>
+        </div>
+
+
+        <div class="col-md-3 mb-3">
+            <a asp-controller="Cursos" asp-action="Index" class="btn btn-info btn-lg btn-block">
+                Ver Cursos
+            </a>
+        </div>
+
+
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Coordinador"))
+        {
+            <div class="col-md-3 mb-3">
+                <a asp-controller="Coordinador" asp-action="Cursos" class="btn btn-success btn-lg btn-block">
+                    Panel Coordinador
+                </a>
+            </div>
+        }
+
+
+        <div class="col-md-3 mb-3">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form asp-area="Identity" asp-page="/Account/Logout" method="post">
+                    <button type="submit" class="btn btn-danger btn-lg btn-block">Cerrar Sesión</button>
+                </form>
+            }
+            else
+            {
+                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-warning btn-lg btn-block">
+                    Iniciar Sesión
+                </a>
+            }
+        </div>
+    </div>
+
+    <hr class="my-4" />
+
+    <div class="text-center">
+        <p>Explora los cursos, inscríbete y gestiona matrículas según tu rol.</p>
+    </div>
 </div>
