@@ -1,0 +1,25 @@
+@model IEnumerable<PortalAcademico.Models.Curso>
+
+<h1>Lista de Cursos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Créditos</th>
+            <th>Horario Inicio</th>
+            <th>Horario Fin</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var curso in Model)
+    {
+        <tr>
+            <td>@curso.Nombre</td>
+            <td>@curso.Creditos</td>
+            <td>@curso.HorarioInicio</td>
+            <td>@curso.HorarioFin</td>
+        </tr>
+    }
+    </tbody>
+</table>
