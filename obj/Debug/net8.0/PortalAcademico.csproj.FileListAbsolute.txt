@@ -166,3 +166,7 @@ C:\proyecto final\PortalAcademico\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysi
 C:\proyecto final\PortalAcademico\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\proyecto final\PortalAcademico\bin\Debug\net8.0\runtimes\linux-musl-s390x\native\libe_sqlite3.so
 C:\proyecto final\PortalAcademico\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\proyecto final\PortalAcademico\obj\Debug\net8.0\PortalAcademico.sourcelink.json
+C:\proyecto final\PortalAcademico\bin\Debug\net8.0\Microsoft.Extensions.Caching.StackExchangeRedis.dll
+C:\proyecto final\PortalAcademico\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\proyecto final\PortalAcademico\bin\Debug\net8.0\StackExchange.Redis.dll
