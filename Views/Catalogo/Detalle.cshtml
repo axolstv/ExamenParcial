@@ -1,8 +1,6 @@
 @model PortalAcademico.Models.Curso
-
-@{
-    ViewData["Title"] = "Detalle del Curso";
-}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 <div class="container mt-5">
     <div class="card shadow-lg border-0">
@@ -15,10 +13,34 @@
             <p><strong>Cupo Máximo:</strong> @Model.CupoMaximo</p>
             <p><strong>Horario:</strong> @Model.HorarioInicio - @Model.HorarioFin</p>
 
-            <form method="post" asp-action="Inscribirse" asp-route-id="@Model.Id">
-                <button type="submit" class="btn btn-success">Inscribirse</button>
-                <a asp-action="Index" class="btn btn-secondary">Volver</a>
-            </form>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form method="post" asp-controller="Matriculas" asp-action="Inscribirse">
+                    <input type="hidden" name="cursoId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-success">Inscribirse</button>
+                </form>
+            }
+            else
+            {
+                <a class="btn btn-primary"
+                   asp-area="Identity"
+                   asp-page="/Account/Login"
+                   asp-route-returnUrl="@Url.Action("Detalle","Catalogo", new { id = Model.Id })">
+                    Inicia sesión para inscribirte
+                </a>
+            }
+
+            <a asp-action="Index" class="btn btn-secondary mt-2">Volver</a>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger mt-3">@TempData["Error"]</div>
+            }
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success mt-3">@TempData["Success"]</div>
+            }
         </div>
     </div>
 </div>
