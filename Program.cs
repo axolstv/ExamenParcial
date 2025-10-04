@@ -12,21 +12,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// Identity
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>() 
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
-
-// ----------------------------------------
-// Redis Cache
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = builder.Configuration.GetConnectionString("Redis"); // agrega tu Redis
+    options.Configuration = builder.Configuration.GetConnectionString("Redis"); 
 });
 
-// Session
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -34,13 +29,9 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// HttpContextAccessor para layout
+
 builder.Services.AddHttpContextAccessor();
-// ----------------------------------------
-
 var app = builder.Build();
-
-// Middlewares
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
@@ -59,18 +50,14 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ----------------------------------------
-// Middleware de sesión
 app.UseSession();
-// ----------------------------------------
-
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Cursos}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
-// Seed inicial
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

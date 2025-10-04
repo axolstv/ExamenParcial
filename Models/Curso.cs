@@ -28,6 +28,7 @@ namespace PortalAcademico.Models
 
         public bool Activo { get; set; }
 
-        public ICollection<Matricula>? Matriculas { get; set; }
+        public ICollection<Matricula> Matriculas { get; set; } = new List<Matricula>();
+
     }
 }

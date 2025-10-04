@@ -32,6 +32,14 @@ namespace PortalAcademico.Data
             builder.Entity<Matricula>()
                 .HasIndex(m => new { m.CursoId, m.UsuarioId })
                 .IsUnique();
+
+ 
+            builder.Entity<Matricula>()
+                .HasOne(m => m.Usuario)
+                .WithMany()
+                .HasForeignKey(m => m.UsuarioId);
         }
+
+        
     }
 }

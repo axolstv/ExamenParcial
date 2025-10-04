@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
 namespace PortalAcademico.Models
@@ -13,6 +14,7 @@ namespace PortalAcademico.Models
         [Required]
         public string UsuarioId { get; set; } = string.Empty;
 
+        public IdentityUser Usuario { get; set; } = default!; 
         [DataType(DataType.DateTime)]
         public DateTime FechaRegistro { get; set; } = DateTime.Now;
 
@@ -27,4 +29,3 @@ namespace PortalAcademico.Models
         Cancelada
     }
 }
-
